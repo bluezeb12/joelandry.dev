@@ -1,0 +1,30 @@
+{
+    "slug": "REPLACE-company-slug",
+    "companyName": "REPLACE Company Name",
+    "roleName": "Lead Software Engineer",
+    "customSummary": null,
+    "customIntro": null,
+    "experienceIds": [
+        "exp-btcdepot-senior",
+        "exp-disney-senior",
+        "exp-disney-backend",
+        "exp-disney-contractor",
+        "exp-frsa-developer",
+        "exp-frsa-intern",
+        "exp-bags-intern"
+    ],
+    "experienceOverrides": {
+        "exp-disney-senior": {
+            "role": "Lead Software Engineer",
+            "highlights": [
+                "Led a team of 5 software engineers responsible for the backend services of a major streaming platform",
+                "Improved system performance by 20% by optimizing database queries and implementing caching strategies",
+                "Mentored junior engineers and conducted code reviews to ensure code quality and best practices"
+            ]
+        }
+    },
+    "projectIds": null,
+    "educationIds": null,
+    "highlightedSkills": null,
+    "hiddenSkillCategories": null
+}

@@ -9,14 +9,8 @@ import {
 // Statically import the master resume
 import resumeData from "@/data/resume.json";
 
-// Statically import and register application configurations
-// Whenever you add a new application JSON file under src/data/applications/,
-// import it here and register its slug in the registry below.
-import testCompanyConfig from "@/data/applications/test-company.json";
-
-const applicationsRegistry: Record<string, unknown> = {
-  "test-company": testCompanyConfig,
-};
+// Import the auto-generated application registry
+import { applicationsRegistry } from "./applications-registry";
 
 /**
  * Resolves a privileged string configuration to either its string value
@@ -114,7 +108,19 @@ export async function getTailoredResume(
 
   // Filter experience by IDs, preserving the order from the application config
   const filteredExperience = application.experienceIds
-    .map((id) => masterResume.experience.find((exp) => exp.id === id))
+    .map((id) => {
+      const exp = masterResume.experience.find((exp) => exp.id === id);
+      if (!exp) return undefined;
+      const override = application.experienceOverrides?.[id];
+      if (override) {
+        return {
+          ...exp,
+          role: override.role ?? exp.role,
+          highlights: override.highlights ?? exp.highlights,
+        };
+      }
+      return exp;
+    })
     .filter((exp): exp is NonNullable<typeof exp> => exp !== undefined);
 
   // Filter projects if specified, otherwise include all

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { verifyToken, getCookieName } from "./lib/auth";
+import { verifyToken, getCookieName, getActiveSessionSlug } from "./lib/auth";
 
 /**
  * Middleware that protects /apply/* routes.
@@ -8,6 +8,16 @@ import { verifyToken, getCookieName } from "./lib/auth";
  */
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // If visiting the home page, check for an active application session
+  if (pathname === "/") {
+    const allCookies = request.cookies.getAll();
+    const activeSlug = await getActiveSessionSlug(allCookies);
+    if (activeSlug) {
+      return NextResponse.redirect(new URL(`/apply/${activeSlug}`, request.url));
+    }
+    return NextResponse.next();
+  }
 
   // Extract the slug from /apply/[slug] or /apply/[slug]/...
   const match = pathname.match(/^\/apply\/([^/]+)/);
@@ -45,5 +55,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/apply/:path*",
+  matcher: ["/", "/apply/:path*"],
 };

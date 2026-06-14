@@ -1,0 +1,34 @@
+{
+    "slug": "test-company-b",
+    "companyName": "Test Company B",
+    "roleName": "Lead Software Engineer",
+    "customSummary": null,
+    "customIntro": "Hi Test Company team! This is a tailored view of my resume highlighting the most relevant experience for this role.",
+    "experienceIds": [
+        "exp-btcdepot-senior",
+        "exp-disney-senior",
+        "exp-disney-backend",
+        "exp-disney-contractor"
+    ],
+    "experienceOverrides": {
+        "exp-btcdepot-senior": {
+            "role": "Lead Full-Stack Software Engineer"
+        },
+        "exp-disney-senior": {
+            "role": "Lead Software Engineer"
+        },
+        "exp-disney-backend": {
+            "role": "Senior Backend Engineer"
+        }
+    },
+    "projectIds": null,
+    "educationIds": null,
+    "highlightedSkills": [
+        "TypeScript",
+        "React",
+        "Node.js",
+        "AWS",
+        "Docker"
+    ],
+    "hiddenSkillCategories": null
+}

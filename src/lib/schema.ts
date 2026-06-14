@@ -100,6 +100,11 @@ export const RawResumeSchema = z.object({
 
 // ─── Application Config Schema ──────────────────────────────────────────────
 
+const ExperienceOverrideSchema = z.object({
+  role: z.string().optional(),
+  highlights: z.array(z.string()).optional(),
+});
+
 export const ApplicationSchema = z.object({
   slug: z.string(),
   companyName: z.string(),
@@ -107,6 +112,7 @@ export const ApplicationSchema = z.object({
   customSummary: z.string().nullable().optional(),
   customIntro: z.string().nullable().optional(),
   experienceIds: z.array(z.string()),
+  experienceOverrides: z.record(z.string(), ExperienceOverrideSchema).nullable().optional(),
   projectIds: z.array(z.string()).nullable().optional(),
   educationIds: z.array(z.string()).nullable().optional(),
   highlightedSkills: z.array(z.string()).nullable().optional(),

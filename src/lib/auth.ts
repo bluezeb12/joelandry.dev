@@ -3,6 +3,8 @@
  * Compatible with Cloudflare Workers / Edge Runtime.
  */
 
+import { applicationsRegistry } from "./applications-registry";
+
 const COOKIE_NAME_PREFIX = "auth_";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7; // 7 days in seconds
 
@@ -121,6 +123,27 @@ export async function verifyToken(
   } catch {
     return false;
   }
+}
+
+/**
+ * Scans cookies to find the first valid authenticated application slug.
+ * Returns the slug if a valid session exists, otherwise null.
+ */
+export async function getActiveSessionSlug(
+  cookiesList: Array<{ name: string; value: string }>
+): Promise<string | null> {
+  for (const cookie of cookiesList) {
+    if (cookie.name.startsWith(COOKIE_NAME_PREFIX)) {
+      const slug = cookie.name.substring(COOKIE_NAME_PREFIX.length);
+      if (slug && slug in applicationsRegistry) {
+        const isValid = await verifyToken(cookie.value, slug);
+        if (isValid) {
+          return slug;
+        }
+      }
+    }
+  }
+  return null;
 }
 
 /**
