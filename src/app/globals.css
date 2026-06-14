@@ -1,1 +1,920 @@
 @import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Design Tokens — Linux Desktop / Terminal Theme with Glassmorphism
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─── Color Palette ──────────────────────────────────────────────────── */
+  --color-bg-primary: #0a0a0f;
+  --color-bg-secondary: #12121a;
+  --color-bg-tertiary: #1a1a26;
+  --color-bg-card: rgba(20, 20, 35, 0.6);
+  --color-bg-card-hover: rgba(25, 25, 45, 0.7);
+
+  --color-text-primary: #e8e8ed;
+  --color-text-secondary: #a0a0b0;
+  --color-text-muted: #6b6b80;
+  --color-text-accent: #00ffd5;
+
+  --color-accent: #00ffd5;
+  --color-accent-dim: rgba(0, 255, 213, 0.15);
+  --color-accent-glow: rgba(0, 255, 213, 0.3);
+
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-accent: rgba(0, 255, 213, 0.25);
+
+  --color-window-close: #ff5f57;
+  --color-window-minimize: #ffbd2e;
+  --color-window-maximize: #28c940;
+
+  --color-tag-bg: rgba(0, 255, 213, 0.1);
+  --color-tag-text: #00ffd5;
+
+  --color-error: #ff4444;
+  --color-error-bg: rgba(255, 68, 68, 0.1);
+
+  /* ─── Typography ─────────────────────────────────────────────────────── */
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-geist-mono), "Fira Code", "JetBrains Mono", monospace;
+
+  /* ─── Spacing ────────────────────────────────────────────────────────── */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+
+  /* ─── Layout ─────────────────────────────────────────────────────────── */
+  --max-width: 52rem;
+  --border-radius: 0.75rem;
+  --border-radius-sm: 0.375rem;
+
+  /* ─── Glassmorphism ──────────────────────────────────────────────────── */
+  --glass-blur: 16px;
+  --glass-bg: rgba(20, 20, 35, 0.65);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+  /* ─── Transitions ────────────────────────────────────────────────────── */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ─── Light Theme ──────────────────────────────────────────────────────── */
+html.light {
+  --color-bg-primary: #f5f5f7;
+  --color-bg-secondary: #ebebef;
+  --color-bg-tertiary: #e0e0e6;
+  --color-bg-card: rgba(255, 255, 255, 0.8);
+  --color-bg-card-hover: rgba(255, 255, 255, 0.9);
+
+  --color-text-primary: #1a1a2e;
+  --color-text-secondary: #4a4a60;
+  --color-text-muted: #8a8aa0;
+  --color-text-accent: #009b83;
+
+  --color-accent: #009b83;
+  --color-accent-dim: rgba(0, 155, 131, 0.1);
+  --color-accent-glow: rgba(0, 155, 131, 0.2);
+
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-accent: rgba(0, 155, 131, 0.25);
+
+  --color-tag-bg: rgba(0, 155, 131, 0.08);
+  --color-tag-text: #007a68;
+
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-border: 1px solid rgba(0, 0, 0, 0.06);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Base Styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Background Pattern ───────────────────────────────────────────────── */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 255, 213, 0.05), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0, 100, 255, 0.03), transparent),
+    var(--color-bg-primary);
+}
+
+html.light body::before {
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 155, 131, 0.04), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 100%, rgba(0, 80, 200, 0.02), transparent),
+    var(--color-bg-primary);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Glassmorphism Terminal Window
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.terminal-window {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--glass-shadow);
+  overflow: hidden;
+  transition:
+    box-shadow var(--transition-normal),
+    border-color var(--transition-normal);
+}
+
+.terminal-window:hover {
+  box-shadow:
+    var(--glass-shadow),
+    0 0 0 1px rgba(0, 255, 213, 0.05);
+}
+
+html.light .terminal-window:hover {
+  box-shadow:
+    var(--glass-shadow),
+    0 0 0 1px rgba(0, 155, 131, 0.08);
+}
+
+.terminal-title-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(0, 0, 0, 0.15);
+  border-bottom: 1px solid var(--color-border);
+  user-select: none;
+}
+
+html.light .terminal-title-bar {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.terminal-dots {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.terminal-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.terminal-dot--close {
+  background: var(--color-window-close);
+}
+
+.terminal-dot--minimize {
+  background: var(--color-window-minimize);
+}
+
+.terminal-dot--maximize {
+  background: var(--color-window-maximize);
+}
+
+.terminal-title {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  flex: 1;
+  text-align: center;
+  padding-right: 54px; /* offset for the dots width to center text */
+}
+
+.terminal-body {
+  padding: var(--space-lg) var(--space-xl);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Section Headings — Terminal Prompt Style
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--color-text-accent);
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.section-heading .prompt {
+  color: var(--color-text-muted);
+  user-select: none;
+}
+
+.section-heading .cursor {
+  display: inline-block;
+  width: 8px;
+  height: 1.1em;
+  background: var(--color-accent);
+  animation: blink 1.2s step-end infinite;
+  vertical-align: text-bottom;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Experience Timeline
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.timeline {
+  position: relative;
+  padding-left: var(--space-xl);
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    180deg,
+    var(--color-accent),
+    var(--color-border) 80%,
+    transparent
+  );
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: var(--space-xl);
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--space-xl) - 4px);
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-bg-primary);
+  border: 2px solid var(--color-accent);
+  z-index: 1;
+}
+
+.timeline-item:first-child::before {
+  background: var(--color-accent);
+  box-shadow: 0 0 8px var(--color-accent-glow);
+}
+
+/* ─── Experience Card ──────────────────────────────────────────────────── */
+
+.experience-card {
+  transition: transform var(--transition-normal);
+}
+
+.experience-header {
+  margin-bottom: var(--space-sm);
+}
+
+.experience-company {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.experience-division {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.experience-role {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.experience-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+}
+
+.experience-type-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 8px;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--color-accent-dim);
+  color: var(--color-text-accent);
+  border: 1px solid var(--color-border-accent);
+}
+
+.experience-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.experience-highlights li {
+  position: relative;
+  padding-left: var(--space-lg);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+}
+
+.experience-highlights li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+}
+
+.experience-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-md);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Skill Badges
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+  border: 1px solid transparent;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.skill-tag:hover {
+  border-color: var(--color-border-accent);
+  background: var(--color-accent-dim);
+}
+
+.skills-category {
+  margin-bottom: var(--space-lg);
+}
+
+.skills-category:last-child {
+  margin-bottom: 0;
+}
+
+.skills-category-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.skills-category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Education
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.education-institution {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.education-degree {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+}
+
+.education-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.education-coursework {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Header / Contact
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.resume-name {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.resume-title {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--color-text-accent);
+  margin-top: var(--space-xs);
+}
+
+.resume-summary {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-top: var(--space-md);
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm) var(--space-md);
+  margin-top: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.contact-link:hover {
+  color: var(--color-text-accent);
+}
+
+.contact-link svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Login Page
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-xl);
+}
+
+.login-window {
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.login-input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  outline: none;
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+html.light .login-input {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.login-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-dim);
+}
+
+.login-input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.login-button {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-accent);
+  color: #0a0a0f;
+  border: none;
+  border-radius: var(--border-radius-sm);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.login-button:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.login-button:active {
+  transform: translateY(0);
+}
+
+.login-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.login-error {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-error-bg);
+  border: 1px solid rgba(255, 68, 68, 0.2);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-error);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+}
+
+.login-prompt {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Buttons — Theme Toggle & Print
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.toolbar {
+  position: fixed;
+  top: var(--space-md);
+  right: var(--space-md);
+  display: flex;
+  gap: var(--space-sm);
+  z-index: 50;
+}
+
+.toolbar-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--border-radius-sm);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: var(--glass-border);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition:
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.toolbar-button:hover {
+  color: var(--color-text-accent);
+  border-color: var(--color-border-accent);
+}
+
+.toolbar-button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Tailored Page — Custom Intro
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.application-intro {
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-accent-dim);
+  border: 1px solid var(--color-border-accent);
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+  line-height: 1.65;
+  margin-bottom: var(--space-lg);
+}
+
+.application-intro strong {
+  color: var(--color-text-accent);
+}
+
+.application-role-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  background: var(--color-accent-dim);
+  color: var(--color-text-accent);
+  border: 1px solid var(--color-border-accent);
+  margin-top: var(--space-sm);
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Animations
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.5s var(--transition-normal) both;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s var(--transition-normal) both;
+}
+
+/* Staggered delays for child elements */
+.stagger > :nth-child(1) { animation-delay: 0ms; }
+.stagger > :nth-child(2) { animation-delay: 80ms; }
+.stagger > :nth-child(3) { animation-delay: 160ms; }
+.stagger > :nth-child(4) { animation-delay: 240ms; }
+.stagger > :nth-child(5) { animation-delay: 320ms; }
+.stagger > :nth-child(6) { animation-delay: 400ms; }
+.stagger > :nth-child(7) { animation-delay: 480ms; }
+.stagger > :nth-child(8) { animation-delay: 560ms; }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Print Styles — Always Light Theme
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media print {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: #1a1a2e !important;
+    font-size: 11pt;
+    line-height: 1.4;
+  }
+
+  body::before {
+    display: none !important;
+  }
+
+  /* Hide non-essential elements */
+  .toolbar,
+  .terminal-dots,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Reset glassmorphism */
+  .terminal-window {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+
+  .terminal-title-bar {
+    display: none !important;
+  }
+
+  .terminal-body {
+    padding: 0 !important;
+  }
+
+  /* Clean text colors */
+  .resume-name {
+    color: #1a1a2e !important;
+    font-size: 20pt;
+  }
+
+  .resume-title {
+    color: #333 !important;
+  }
+
+  .resume-summary,
+  .experience-highlights li {
+    color: #333 !important;
+  }
+
+  .section-heading {
+    color: #1a1a2e !important;
+    border-bottom-color: #ddd !important;
+  }
+
+  .section-heading .prompt {
+    color: #666 !important;
+  }
+
+  .section-heading .cursor {
+    display: none !important;
+  }
+
+  .experience-company,
+  .education-institution {
+    color: #1a1a2e !important;
+  }
+
+  .experience-role,
+  .education-degree {
+    color: #444 !important;
+  }
+
+  .experience-meta,
+  .education-meta {
+    color: #666 !important;
+  }
+
+  .experience-highlights li::before {
+    color: #333 !important;
+  }
+
+  .skill-tag {
+    background: #f0f0f0 !important;
+    color: #333 !important;
+    border: 1px solid #ddd !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .experience-type-badge {
+    background: #f0f0f0 !important;
+    color: #333 !important;
+    border-color: #ddd !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .contact-link {
+    color: #333 !important;
+  }
+
+  /* Timeline adjustments for print */
+  .timeline::before {
+    background: #ccc !important;
+  }
+
+  .timeline-item::before {
+    background: white !important;
+    border-color: #666 !important;
+    box-shadow: none !important;
+  }
+
+  .timeline-item:first-child::before {
+    background: #666 !important;
+  }
+
+  .application-intro {
+    background: #f8f8f8 !important;
+    border-color: #ddd !important;
+    color: #333 !important;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .application-intro strong {
+    color: #1a1a2e !important;
+  }
+
+  /* Page break control */
+  .terminal-window {
+    break-inside: avoid;
+  }
+
+  .experience-card {
+    break-inside: avoid;
+  }
+
+  /* Tighten spacing for print */
+  .terminal-body {
+    padding: 0.5rem 0 !important;
+  }
+
+  .timeline-item {
+    padding-bottom: 0.75rem !important;
+  }
+
+  @page {
+    margin: 0.6in;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   Responsive
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 640px) {
+  .terminal-body {
+    padding: var(--space-md);
+  }
+
+  .resume-name {
+    font-size: 1.5rem;
+  }
+
+  .timeline {
+    padding-left: var(--space-lg);
+  }
+
+  .timeline-item::before {
+    left: calc(-1 * var(--space-lg) - 4px);
+  }
+
+  .experience-meta {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .contact-links {
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+}

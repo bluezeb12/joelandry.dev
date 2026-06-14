@@ -1,0 +1,22 @@
+{
+  "slug": "test-company",
+  "companyName": "Test Company",
+  "roleName": "Senior Software Engineer",
+  "customSummary": null,
+  "customIntro": "Hi Test Company team! This is a tailored view of my resume highlighting the most relevant experience for this role.",
+  "experienceIds": [
+    "exp-btcdepot-senior",
+    "exp-disney-senior",
+    "exp-disney-backend"
+  ],
+  "projectIds": null,
+  "educationIds": null,
+  "highlightedSkills": [
+    "TypeScript",
+    "React",
+    "Node.js",
+    "AWS",
+    "Docker"
+  ],
+  "hiddenSkillCategories": null
+}

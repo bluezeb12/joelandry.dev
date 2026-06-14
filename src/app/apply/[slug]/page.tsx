@@ -1,4 +1,5 @@
-import { getResume } from "@/lib/data";
+import { notFound } from "next/navigation";
+import { getTailoredResume } from "@/lib/data";
 import {
   TerminalWindow,
   SectionHeading,
@@ -10,8 +11,19 @@ import {
   ThemeToggle,
 } from "@/components/resume";
 
-export default async function Home() {
-  const resume = await getResume();
+export default async function TailoredResumePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const result = await getTailoredResume(slug);
+
+  if (!result) {
+    notFound();
+  }
+
+  const { resume, application } = result;
 
   return (
     <main
@@ -27,6 +39,24 @@ export default async function Home() {
         <ThemeToggle />
         <PrintButton />
       </div>
+
+      {/* ─── Application Intro ────────────────────────────────────── */}
+      {(application.customIntro || application.roleName) && (
+        <div style={{ marginBottom: "2rem" }}>
+          <TerminalWindow title={`~/apply/${slug}`}>
+            <div style={{ textAlign: "center" }}>
+              <span className="application-role-badge">
+                {application.roleName} @ {application.companyName}
+              </span>
+            </div>
+            {application.customIntro && (
+              <div className="application-intro" style={{ marginTop: "1rem" }}>
+                {application.customIntro}
+              </div>
+            )}
+          </TerminalWindow>
+        </div>
+      )}
 
       {/* ─── Header ───────────────────────────────────────────────── */}
       <div style={{ marginBottom: "2rem" }}>

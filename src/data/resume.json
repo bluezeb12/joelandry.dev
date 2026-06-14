@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "name": "Joseph Landry",
+    "title": "Senior Full-Stack Software Engineer",
+    "location": "Remote (Orlando, FL)",
+    "email": "joe@joelandry.dev",
+    "phone": "(978) 551-0978",
+    "links": [
+      {
+        "label": "LinkedIn",
+        "url": "https://www.linkedin.com/in/joseph-dillan-fka-landry-69357492",
+        "icon": "linkedin"
+      }
+    ],
+    "summary": "Accomplished Senior Full-Stack and Backend Software Engineer with 10 years of experience designing, scaling, and migrating high-availability systems. Proven track record of leading engineering initiatives, optimizing API performance, and architecting robust cloud infrastructure across financial services and enterprise entertainment domains. Expert in TypeScript/Node.js backend orchestration layers, AWS cloud migrations, and modern JavaScript frameworks, with a deep foundation in computer science and agile engineering practices."
+  },
+  "experience": [
+    {
+      "id": "exp-btcdepot-senior",
+      "company": "Bitcoin Depot, Inc.",
+      "role": "Senior Full-Stack Software Engineer",
+      "type": "full-time",
+      "startDate": "2024-10",
+      "endDate": "2026-07",
+      "location": "Remote",
+      "highlights": [
+        "Accelerated compliance deployment cycles from weeks to 2 days by architecting core features for a React front-end application controlling a massive national fleet of Bitcoin ATMs.",
+        "Successfully dockerized and migrated multiple legacy applications to AWS cloud infrastructure, designing robust GitHub Actions CI/CD pipelines in close collaboration with DevOps teams to ensure seamless Infrastructure as Code (IaC) compliance.",
+        "Engineered high-throughput Node.js backend APIs utilizing Express, MongoDB, and Formance Ledger to manage secure financial transaction flows."
+      ],
+      "tags": [
+        "React",
+        "Node.js",
+        "Express",
+        "MongoDB",
+        "AWS",
+        "Docker",
+        "GitHub Actions",
+        "CI/CD",
+        "TypeScript"
+      ]
+    },
+    {
+      "id": "exp-disney-senior",
+      "company": "The Walt Disney Company (TWDC)",
+      "division": "DPEP",
+      "role": "Senior Backend Software Engineer",
+      "type": "full-time",
+      "startDate": "2021-01",
+      "endDate": "2024-07",
+      "location": "Orlando, FL (Remote)",
+      "highlights": [
+        "Led a cross-functional team of software engineers in developing scalable REST APIs and Node.js backend orchestration layers using TypeScript, JavaScript, Express, and Restify.",
+        "Directed legacy web service uplifts to AWS Cloud, establishing rigid enterprise coding standards, code reviews, and debugging workflows to guarantee system consistency and high-availability architecture.",
+        "Prioritized critical guest-facing features throughout the software development lifecycle (SDLC), ensuring low-latency responses for millions of park visitors."
+      ],
+      "tags": [
+        "TypeScript",
+        "JavaScript",
+        "Node.js",
+        "Express",
+        "Restify",
+        "AWS",
+        "REST APIs",
+        "Leadership"
+      ]
+    },
+    {
+      "id": "exp-disney-backend",
+      "company": "The Walt Disney Company (TWDC)",
+      "division": "DPEP",
+      "role": "Backend Software Engineer",
+      "type": "full-time",
+      "startDate": "2020-03",
+      "endDate": "2021-01",
+      "location": "Orlando, FL (Remote)",
+      "highlights": [
+        "Drastically improved guest throughput speeds at the front gates across the Resort by scaling a multi-index ElasticSearch API in JavaScript to deliver prompt, context-relevant guest data access.",
+        "Maintained, debugged, and optimized critical backend orchestration layers and Node.js microservices across the resort's digital landscape.",
+        "Provided Tier-3 application support, triaging and resolving high-priority runtime incidents affecting guest experience applications."
+      ],
+      "tags": [
+        "JavaScript",
+        "Node.js",
+        "ElasticSearch",
+        "Microservices",
+        "API Development"
+      ]
+    },
+    {
+      "id": "exp-disney-contractor",
+      "company": "The Walt Disney Company (TWDC)",
+      "division": "DPEP",
+      "role": "Software Engineer",
+      "type": "contract",
+      "startDate": "2019-07",
+      "endDate": "2020-03",
+      "location": "Orlando, FL (Remote)",
+      "highlights": [
+        "Developed and optimized Node orchestration layers using TypeScript, JavaScript, and Java backend services backed by comprehensive automated test coverage.",
+        "Engineered cross-domain search capabilities by championing performance enhancements to a legacy enterprise ElasticSearch implementation.",
+        "Participated heavily in complex enterprise deployment operations and production support infrastructure."
+      ],
+      "tags": [
+        "TypeScript",
+        "JavaScript",
+        "Java",
+        "Node.js",
+        "ElasticSearch",
+        "Testing"
+      ]
+    },
+    {
+      "id": "exp-frsa-developer",
+      "company": "FRSA Self Insurers Fund",
+      "role": "C#.NET and Angular Developer",
+      "type": "full-time",
+      "startDate": "2018-05",
+      "endDate": "2019-07",
+      "location": "Orlando, FL",
+      "highlights": [
+        "Architected and delivered business-critical applications, including a secure online client payment portal and proprietary internal systems using C#, .NET Core, Angular, SQL Server, and Entity Framework.",
+        "Owned architectural systems design and technical decision-making for cloud-based applications deployed directly to Azure environments.",
+        "Guaranteed code reliability and production stability by writing extensive unit testing suites."
+      ],
+      "tags": [
+        "C#",
+        ".NET Core",
+        "Angular",
+        "SQL Server",
+        "Entity Framework",
+        "Azure"
+      ]
+    },
+    {
+      "id": "exp-frsa-intern",
+      "company": "FRSA Self Insurers Fund",
+      "role": "Software Engineer Intern",
+      "type": "internship",
+      "startDate": "2016-07",
+      "endDate": "2018-05",
+      "location": "Orlando, FL",
+      "highlights": [
+        "Maintained and extended core desktop applications using C#, .NET Framework, SQL Server, and Entity Framework.",
+        "Executed hotfixes and technical feature updates for the public-facing ASP.NET company website."
+      ],
+      "tags": [
+        "C#",
+        ".NET Framework",
+        "SQL Server",
+        "Entity Framework",
+        "ASP.NET"
+      ]
+    },
+    {
+      "id": "exp-bags-intern",
+      "company": "Bags Inc.",
+      "role": "C#.NET Developer Intern",
+      "type": "internship",
+      "startDate": "2016-02",
+      "endDate": "2016-07",
+      "location": "Orlando, FL",
+      "highlights": [
+        "Optimized data integrity by improving the reliability and processing speed of a Windows Service handling critical database conversions.",
+        "Built a custom C# WinForms utility to generate and print data bit streams, resolving legacy data synchronization errors."
+      ],
+      "tags": [
+        "C#",
+        ".NET",
+        "Windows Services",
+        "WinForms",
+        "SQL"
+      ]
+    }
+  ],
+  "skills": {
+    "Programming Languages": [
+      "TypeScript",
+      "JavaScript",
+      "Node.js",
+      "Python",
+      "C#",
+      "ES6",
+      "ES2021",
+      "CSS",
+      "SASS/SCSS"
+    ],
+    "Frameworks & Libraries": [
+      "React",
+      "Express.js",
+      "Restify.js",
+      "Next.js",
+      "Angular",
+      ".NET Core",
+      ".NET Framework",
+      "ASP.NET",
+      "LINQ"
+    ],
+    "Cloud & DevOps": [
+      "AWS (Lambda, ECS, CloudWatch, Kinesis, S3, CloudFront)",
+      "Docker",
+      "GitHub Actions",
+      "Jenkins",
+      "Azure"
+    ],
+    "Databases & Tools": [
+      "SQL",
+      "PostgreSQL",
+      "MongoDB",
+      "SQL Server",
+      "ElasticSearch",
+      "Entity Framework"
+    ],
+    "Methodologies": [
+      "Systems Design",
+      "Functional & Object-Oriented Programming (OOP)",
+      "CI/CD",
+      "Unit & Automation Testing"
+    ]
+  },
+  "education": [
+    {
+      "id": "edu-ucf",
+      "institution": "University of Central Florida",
+      "degree": "Bachelor of Science",
+      "field": "Computer Science",
+      "location": "Orlando, FL",
+      "startDate": "2014-08",
+      "graduationDate": "2018-05",
+      "coursework": [
+        "Database Systems",
+        "Advanced Data Structures",
+        "Algorithm Design & Analysis",
+        "Software Development Life-Cycle (SDLC)",
+        "Systems & Network Administration",
+        "Object-Oriented Programming",
+        "Architecture Design"
+      ]
+    }
+  ]
+}

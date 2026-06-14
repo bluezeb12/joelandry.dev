@@ -1,0 +1,20 @@
+{
+  "slug": "REPLACE-company-slug",
+  "companyName": "REPLACE Company Name",
+  "roleName": "REPLACE Role Title",
+  "customSummary": null,
+  "customIntro": null,
+  "experienceIds": [
+    "exp-btcdepot-senior",
+    "exp-disney-senior",
+    "exp-disney-backend",
+    "exp-disney-contractor",
+    "exp-frsa-developer",
+    "exp-frsa-intern",
+    "exp-bags-intern"
+  ],
+  "projectIds": null,
+  "educationIds": null,
+  "highlightedSkills": null,
+  "hiddenSkillCategories": null
+}
