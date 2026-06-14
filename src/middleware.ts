@@ -3,10 +3,10 @@ import type { NextRequest } from "next/server";
 import { verifyToken, getCookieName } from "./lib/auth";
 
 /**
- * Proxy (formerly middleware) that protects /apply/* routes.
+ * Middleware that protects /apply/* routes.
  * Redirects unauthenticated requests to the login page.
  */
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Extract the slug from /apply/[slug] or /apply/[slug]/...

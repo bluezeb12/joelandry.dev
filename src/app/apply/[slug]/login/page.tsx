@@ -3,6 +3,8 @@
 import { use, useState, type FormEvent } from "react";
 import { TerminalWindow } from "@/components/resume/TerminalWindow";
 
+export const runtime = "edge";
+
 export default function LoginPage({
   params,
 }: {

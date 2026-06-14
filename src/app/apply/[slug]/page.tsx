@@ -11,6 +11,8 @@ import {
   ThemeToggle,
 } from "@/components/resume";
 
+export const runtime = "edge";
+
 export default async function TailoredResumePage({
   params,
 }: {

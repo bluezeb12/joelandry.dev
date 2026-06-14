@@ -1,5 +1,3 @@
-import fs from "fs/promises";
-import path from "path";
 import {
   ResumeSchema,
   ApplicationSchema,
@@ -7,60 +5,54 @@ import {
   type ApplicationConfig,
 } from "./schema";
 
+// Statically import the master resume
+import resumeData from "@/data/resume.json";
+
+// Statically import and register application configurations
+// Whenever you add a new application JSON file under src/data/applications/,
+// import it here and register its slug in the registry below.
+import testCompanyConfig from "@/data/applications/test-company.json";
+
+const applicationsRegistry: Record<string, unknown> = {
+  "test-company": testCompanyConfig,
+};
+
 // ─── Resume ─────────────────────────────────────────────────────────────────
 
 /**
- * Reads and validates the master resume JSON.
+ * Validates the statically imported master resume JSON.
  * Throws a ZodError if the data doesn't match the schema.
  */
 export async function getResume(): Promise<Resume> {
-  const filePath = path.join(process.cwd(), "src/data/resume.json");
-  const raw = await fs.readFile(filePath, "utf-8");
-  return ResumeSchema.parse(JSON.parse(raw));
+  return ResumeSchema.parse(resumeData);
 }
 
 // ─── Applications ───────────────────────────────────────────────────────────
 
 /**
- * Reads and validates a single application config by slug.
- * Returns null if the application file doesn't exist.
+ * Validates a single application config by slug from the static registry.
+ * Returns null if the application slug doesn't exist.
  */
 export async function getApplication(
   slug: string
 ): Promise<ApplicationConfig | null> {
-  const filePath = path.join(
-    process.cwd(),
-    `src/data/applications/${slug}.json`
-  );
-
+  const rawConfig = applicationsRegistry[slug];
+  if (!rawConfig) {
+    return null;
+  }
   try {
-    const raw = await fs.readFile(filePath, "utf-8");
-    return ApplicationSchema.parse(JSON.parse(raw));
+    return ApplicationSchema.parse(rawConfig);
   } catch (err) {
-    // File doesn't exist — not a valid application slug
-    if (err instanceof Error && "code" in err && err.code === "ENOENT") {
-      return null;
-    }
     // Zod validation error or other issue — re-throw
     throw err;
   }
 }
 
 /**
- * Lists all available application slugs by scanning the applications directory.
- * Excludes the _template.json file.
+ * Lists all available application slugs from the static registry.
  */
 export async function listApplicationSlugs(): Promise<string[]> {
-  const dirPath = path.join(process.cwd(), "src/data/applications");
-
-  try {
-    const files = await fs.readdir(dirPath);
-    return files
-      .filter((f) => f.endsWith(".json") && !f.startsWith("_"))
-      .map((f) => f.replace(".json", ""));
-  } catch {
-    return [];
-  }
+  return Object.keys(applicationsRegistry);
 }
 
 // ─── Tailored Resume ────────────────────────────────────────────────────────

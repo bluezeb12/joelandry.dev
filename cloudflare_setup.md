@@ -40,6 +40,18 @@ In the **Configure build and deployments** screen, configure the following setti
 *   **Build Output Directory:** `.vercel/output/static`
 
 > [!IMPORTANT]
+> **Edge Runtime Requirements for Dynamic Routes:**
+> Cloudflare Pages requires all dynamic (non-static) routes and middleware/proxies to be executed on the **Edge Runtime**. 
+> 
+> The project has already been updated to run on the **Edge Runtime** where required:
+> *   [src/middleware.ts](file:///home/jdillan/Development/joelandry.dev/src/middleware.ts) (runs on Edge runtime by default; renamed from `proxy.ts` for Cloudflare builder compatibility)
+> *   [src/app/api/auth/login/route.ts](file:///home/jdillan/Development/joelandry.dev/src/app/api/auth/login/route.ts) (API, exports `runtime = "edge"`)
+> *   [src/app/apply/[slug]/page.tsx](file:///home/jdillan/Development/joelandry.dev/src/app/apply/[slug]/page.tsx) (Dynamic page, exports `runtime = "edge"`)
+> *   [src/app/apply/[slug]/login/page.tsx](file:///home/jdillan/Development/joelandry.dev/src/app/apply/[slug]/login/page.tsx) (Login page, exports `runtime = "edge"`)
+> 
+> If you add more API endpoints or dynamic routes in the future, you must include `export const runtime = "edge";` in those files. If you add route-matching logic, add it to `src/middleware.ts`.
+
+> [!IMPORTANT]
 > **Compatibility Flag Required:**
 > Next.js uses modern Node.js and runtime APIs. You **must** enable the `nodejs_compat` compatibility flag in Cloudflare Pages so it compiles successfully.
 > 
