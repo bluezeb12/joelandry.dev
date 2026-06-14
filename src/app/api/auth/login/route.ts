@@ -39,12 +39,34 @@ export async function POST(request: Request) {
 
     const redirectUrl = new URL(`/apply/${slug}`, request.url);
 
+    // Parse incoming cookies to find any other auth cookies to clear
+    const cookieHeader = request.headers.get("Cookie") || "";
+    const otherAuthCookiesToClear: string[] = [];
+    cookieHeader.split(";").forEach((cookieStr) => {
+      const parts = cookieStr.split("=");
+      const name = parts[0].trim();
+      if (name.startsWith("auth_") && name !== cookieName) {
+        otherAuthCookiesToClear.push(name);
+      }
+    });
+
+    const headers = new Headers();
+    headers.set("Location", redirectUrl.toString());
+    headers.append(
+      "Set-Cookie",
+      `${cookieName}=${token}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=${COOKIE_MAX_AGE}`
+    );
+
+    for (const name of otherAuthCookiesToClear) {
+      headers.append(
+        "Set-Cookie",
+        `${name}=; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=0; Expires=Thu, 01 Jan 1970 00:00:00 GMT`
+      );
+    }
+
     return new Response(null, {
       status: 302,
-      headers: {
-        Location: redirectUrl.toString(),
-        "Set-Cookie": `${cookieName}=${token}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=${COOKIE_MAX_AGE}`,
-      },
+      headers,
     });
   } catch {
     return Response.json({ error: "Invalid request body" }, { status: 400 });

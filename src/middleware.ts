@@ -26,7 +26,18 @@ export async function middleware(request: NextRequest) {
   const slug = match[1];
 
   // Allow login page and API routes through without auth
-  if (pathname.endsWith("/login") || pathname.startsWith("/api/")) {
+  if (pathname.endsWith("/login")) {
+    const response = NextResponse.next();
+    const allCookies = request.cookies.getAll();
+    for (const cookie of allCookies) {
+      if (cookie.name.startsWith("auth_")) {
+        response.cookies.delete(cookie.name);
+      }
+    }
+    return response;
+  }
+
+  if (pathname.startsWith("/api/")) {
     return NextResponse.next();
   }
 
