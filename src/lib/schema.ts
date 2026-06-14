@@ -8,11 +8,22 @@ const LinkSchema = z.object({
   icon: z.string().optional(),
 });
 
+// Schema that allows either a plain string or an object with a privileged flag
+export const PrivilegedStringSchema = z.union([
+  z.string(),
+  z.object({
+    value: z.string(),
+    privileged: z.boolean().default(false),
+  }),
+]);
+
+export type PrivilegedString = z.infer<typeof PrivilegedStringSchema>;
+
 const MetaSchema = z.object({
   name: z.string(),
   title: z.string(),
   location: z.string(),
-  email: z.string().email(),
+  email: z.string(),
   phone: z.string().optional(),
   links: z.array(LinkSchema),
   summary: z.string(),
@@ -60,6 +71,26 @@ const ProjectSchema = z.object({
 
 export const ResumeSchema = z.object({
   meta: MetaSchema,
+  experience: z.array(ExperienceSchema),
+  skills: z.record(z.string(), z.array(z.string())),
+  education: z.array(EducationSchema),
+  certifications: z.array(CertificationSchema).optional(),
+  projects: z.array(ProjectSchema).optional(),
+});
+
+// Raw schemas for parsing JSON before resolving privileged fields
+export const RawMetaSchema = z.object({
+  name: PrivilegedStringSchema,
+  title: PrivilegedStringSchema,
+  location: PrivilegedStringSchema,
+  email: PrivilegedStringSchema,
+  phone: PrivilegedStringSchema.optional(),
+  links: z.array(LinkSchema),
+  summary: PrivilegedStringSchema,
+});
+
+export const RawResumeSchema = z.object({
+  meta: RawMetaSchema,
   experience: z.array(ExperienceSchema),
   skills: z.record(z.string(), z.array(z.string())),
   education: z.array(EducationSchema),

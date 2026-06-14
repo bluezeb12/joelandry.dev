@@ -1,6 +1,7 @@
 import {
   ResumeSchema,
   ApplicationSchema,
+  RawResumeSchema,
   type Resume,
   type ApplicationConfig,
 } from "./schema";
@@ -17,14 +18,52 @@ const applicationsRegistry: Record<string, unknown> = {
   "test-company": testCompanyConfig,
 };
 
+/**
+ * Resolves a privileged string configuration to either its string value
+ * or undefined depending on whether the user is authorized.
+ */
+export function resolvePrivilegedString(
+  val: any,
+  isAuthorized: boolean
+): string | undefined {
+  if (val === undefined || val === null) {
+    return undefined;
+  }
+  if (typeof val === "string") {
+    return val;
+  }
+  if (typeof val === "object" && "value" in val) {
+    if (val.privileged && !isAuthorized) {
+      return undefined;
+    }
+    return val.value;
+  }
+  return undefined;
+}
+
 // ─── Resume ─────────────────────────────────────────────────────────────────
 
 /**
- * Validates the statically imported master resume JSON.
+ * Validates the statically imported master resume JSON, resolving privileged fields.
  * Throws a ZodError if the data doesn't match the schema.
  */
-export async function getResume(): Promise<Resume> {
-  return ResumeSchema.parse(resumeData);
+export async function getResume(isAuthorized = false): Promise<Resume> {
+  const raw = RawResumeSchema.parse(resumeData);
+
+  const resolvedMeta = {
+    name: resolvePrivilegedString(raw.meta.name, isAuthorized)!,
+    title: resolvePrivilegedString(raw.meta.title, isAuthorized)!,
+    location: resolvePrivilegedString(raw.meta.location, isAuthorized)!,
+    email: resolvePrivilegedString(raw.meta.email, isAuthorized)!,
+    phone: resolvePrivilegedString(raw.meta.phone, isAuthorized),
+    links: raw.meta.links,
+    summary: resolvePrivilegedString(raw.meta.summary, isAuthorized)!,
+  };
+
+  return {
+    ...raw,
+    meta: resolvedMeta,
+  };
 }
 
 // ─── Applications ───────────────────────────────────────────────────────────
@@ -67,7 +106,7 @@ export async function getTailoredResume(
   slug: string
 ): Promise<{ resume: Resume; application: ApplicationConfig } | null> {
   const [masterResume, application] = await Promise.all([
-    getResume(),
+    getResume(true),
     getApplication(slug),
   ]);
 

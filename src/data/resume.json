@@ -2,9 +2,15 @@
   "meta": {
     "name": "Joseph Landry",
     "title": "Senior Full-Stack Software Engineer",
-    "location": "Remote (Orlando, FL)",
+    "location": {
+      "value": "Remote (Orlando, FL)",
+      "privileged": true
+    },
     "email": "joe@joelandry.dev",
-    "phone": "(978) 551-0978",
+    "phone": {
+      "value": "(978) 551-0978",
+      "privileged": true
+    },
     "links": [
       {
         "label": "LinkedIn",
