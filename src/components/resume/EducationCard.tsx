@@ -15,7 +15,7 @@ function formatDate(dateStr: string): string {
 
 export function EducationCard({ education }: EducationCardProps) {
   return (
-    <div>
+    <div className="education-card">
       <div className="education-institution">{education.institution}</div>
       <div className="education-degree">
         {education.degree} in {education.field}

@@ -206,7 +206,8 @@ html.light .terminal-title-bar {
   color: var(--color-text-muted);
   flex: 1;
   text-align: center;
-  padding-right: 54px; /* offset for the dots width to center text */
+  padding-right: 54px;
+  /* offset for the dots width to center text */
 }
 
 .terminal-body {
@@ -245,8 +246,15 @@ html.light .terminal-title-bar {
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -265,12 +273,10 @@ html.light .terminal-title-bar {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(
-    180deg,
-    var(--color-accent),
-    var(--color-border) 80%,
-    transparent
-  );
+  background: linear-gradient(180deg,
+      var(--color-accent),
+      var(--color-border) 80%,
+      transparent);
 }
 
 .timeline-item {
@@ -433,6 +439,14 @@ html.light .terminal-title-bar {
 /* ═══════════════════════════════════════════════════════════════════════════
    Education
    ═══════════════════════════════════════════════════════════════════════════ */
+
+.education-card {
+  margin-bottom: var(--space-lg);
+}
+
+.education-card:last-child {
+  margin-bottom: 0;
+}
 
 .education-institution {
   font-size: 1.1rem;
@@ -693,6 +707,7 @@ html.light .login-input {
     opacity: 0;
     transform: translateY(16px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -700,8 +715,13 @@ html.light .login-input {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .animate-fade-in-up {
@@ -713,20 +733,52 @@ html.light .login-input {
 }
 
 /* Staggered delays for child elements */
-.stagger > :nth-child(1) { animation-delay: 0ms; }
-.stagger > :nth-child(2) { animation-delay: 80ms; }
-.stagger > :nth-child(3) { animation-delay: 160ms; }
-.stagger > :nth-child(4) { animation-delay: 240ms; }
-.stagger > :nth-child(5) { animation-delay: 320ms; }
-.stagger > :nth-child(6) { animation-delay: 400ms; }
-.stagger > :nth-child(7) { animation-delay: 480ms; }
-.stagger > :nth-child(8) { animation-delay: 560ms; }
+.stagger> :nth-child(1) {
+  animation-delay: 0ms;
+}
+
+.stagger> :nth-child(2) {
+  animation-delay: 80ms;
+}
+
+.stagger> :nth-child(3) {
+  animation-delay: 160ms;
+}
+
+.stagger> :nth-child(4) {
+  animation-delay: 240ms;
+}
+
+.stagger> :nth-child(5) {
+  animation-delay: 320ms;
+}
+
+.stagger> :nth-child(6) {
+  animation-delay: 400ms;
+}
+
+.stagger> :nth-child(7) {
+  animation-delay: 480ms;
+}
+
+.stagger> :nth-child(8) {
+  animation-delay: 560ms;
+}
+
+.resume-section {
+  margin-bottom: var(--space-xl);
+}
+
+.print-only {
+  display: none !important;
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    Print Styles — Always Light Theme
    ═══════════════════════════════════════════════════════════════════════════ */
 
 @media print {
+
   *,
   *::before,
   *::after {
@@ -734,10 +786,14 @@ html.light .login-input {
     transition: none !important;
   }
 
+  html {
+    font-size: 13.5px !important; /* Scale root font down from 16px to shrink rem-based sizes */
+  }
+
   body {
     background: white !important;
     color: #1a1a2e !important;
-    font-size: 11pt;
+    font-size: 9.5pt;
     line-height: 1.4;
   }
 
@@ -750,6 +806,10 @@ html.light .login-input {
   .terminal-dots,
   .no-print {
     display: none !important;
+  }
+
+  .print-only {
+    display: inline !important;
   }
 
   /* Reset glassmorphism */
@@ -773,7 +833,7 @@ html.light .login-input {
   /* Clean text colors */
   .resume-name {
     color: #1a1a2e !important;
-    font-size: 20pt;
+    font-size: 18pt;
   }
 
   .resume-title {
@@ -788,14 +848,12 @@ html.light .login-input {
   .section-heading {
     color: #1a1a2e !important;
     border-bottom-color: #ddd !important;
-  }
-
-  .section-heading .prompt {
-    color: #666 !important;
-  }
-
-  .section-heading .cursor {
-    display: none !important;
+    font-family: var(--font-sans) !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.8rem !important;
   }
 
   .experience-company,
@@ -865,11 +923,24 @@ html.light .login-input {
   }
 
   /* Page break control */
-  .terminal-window {
+  .resume-section {
+    margin-bottom: 1.2rem !important;
+    /* tighten vertical spacing for print */
+  }
+
+  .application-intro {
     break-inside: avoid;
   }
 
   .experience-card {
+    break-inside: avoid;
+  }
+
+  .skills-category {
+    break-inside: avoid;
+  }
+
+  .education-card {
     break-inside: avoid;
   }
 

@@ -44,7 +44,7 @@ export default async function TailoredResumePage({
 
       {/* ─── Application Intro ────────────────────────────────────── */}
       {(application.customIntro || application.roleName) && (
-        <div style={{ marginBottom: "2rem" }}>
+        <div className="resume-section">
           <TerminalWindow title={`~/apply/${slug}`}>
             <div style={{ textAlign: "center" }}>
               <span className="application-role-badge">
@@ -61,32 +61,32 @@ export default async function TailoredResumePage({
       )}
 
       {/* ─── Header ───────────────────────────────────────────────── */}
-      <div style={{ marginBottom: "2rem" }}>
+      <div className="resume-section">
         <TerminalWindow title="~/joseph-landry/about.json">
           <ResumeHeader meta={resume.meta} />
         </TerminalWindow>
       </div>
 
       {/* ─── Experience ───────────────────────────────────────────── */}
-      <div style={{ marginBottom: "2rem" }}>
+      <div className="resume-section">
         <TerminalWindow title="~/joseph-landry/experience">
-          <SectionHeading command="cat experience.json" />
+          <SectionHeading command="cat experience.json" title="Experience" />
           <ExperienceTimeline experiences={resume.experience} />
         </TerminalWindow>
       </div>
 
       {/* ─── Skills ───────────────────────────────────────────────── */}
-      <div style={{ marginBottom: "2rem" }}>
+      <div className="resume-section">
         <TerminalWindow title="~/joseph-landry/skills">
-          <SectionHeading command="ls skills/" />
+          <SectionHeading command="ls skills/" title="Skills" />
           <SkillsGrid skills={resume.skills} />
         </TerminalWindow>
       </div>
 
       {/* ─── Education ────────────────────────────────────────────── */}
-      <div style={{ marginBottom: "2rem" }}>
+      <div className="resume-section">
         <TerminalWindow title="~/joseph-landry/education">
-          <SectionHeading command="cat education.json" />
+          <SectionHeading command="cat education.json" title="Education" />
           {resume.education.map((edu) => (
             <EducationCard key={edu.id} education={edu} />
           ))}

@@ -27,10 +27,12 @@ export function ResumeHeader({ meta }: ResumeHeaderProps) {
       <p className="resume-title">{meta.title}</p>
 
       <div className="contact-links">
-        <span className="contact-link">
-          <MapPin />
-          {meta.location}
-        </span>
+        {meta.location && (
+          <span className="contact-link">
+            <MapPin />
+            {meta.location}
+          </span>
+        )}
         <a href={`mailto:${meta.email}`} className="contact-link">
           <Mail />
           {meta.email}
