@@ -20,6 +20,10 @@
                 "Led a team of 5 software engineers responsible for the backend services of a major streaming platform",
                 "Improved system performance by 20% by optimizing database queries and implementing caching strategies",
                 "Mentored junior engineers and conducted code reviews to ensure code quality and best practices"
+            ],
+            "tags": [
+                "Leadership",
+                "TypeScript"
             ]
         }
     },

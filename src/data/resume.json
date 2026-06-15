@@ -183,7 +183,6 @@
     "Programming Languages": [
       "TypeScript",
       "JavaScript",
-      "Node.js",
       "Python",
       "C#",
       "ES6",
@@ -192,6 +191,7 @@
       "SASS/SCSS"
     ],
     "Frameworks & Libraries": [
+      "Node.js",
       "React",
       "Express.js",
       "Restify.js",
@@ -206,16 +206,23 @@
       "AWS (Lambda, ECS, CloudWatch, Kinesis, S3, CloudFront)",
       "Docker",
       "GitHub Actions",
+      "Cloudflare",
+      "Google Cloud",
       "Jenkins",
-      "Azure"
+      "Firebase",
+      "Azure",
+      "Dockerization/Containerization",
+      "Cloud Migrations"
     ],
     "Databases & Tools": [
-      "SQL",
       "PostgreSQL",
       "MongoDB",
+      "SQL",
       "SQL Server",
+      "MySQL",
       "ElasticSearch",
-      "Entity Framework"
+      "Entity Framework",
+      "Formance Ledger"
     ],
     "Methodologies": [
       "Systems Design",

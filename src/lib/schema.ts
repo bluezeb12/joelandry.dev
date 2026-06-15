@@ -103,6 +103,7 @@ export const RawResumeSchema = z.object({
 const ExperienceOverrideSchema = z.object({
   role: z.string().optional(),
   highlights: z.array(z.string()).optional(),
+  tags: z.array(z.string()).optional(),
 });
 
 export const ApplicationSchema = z.object({

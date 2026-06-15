@@ -117,6 +117,7 @@ export async function getTailoredResume(
           ...exp,
           role: override.role ?? exp.role,
           highlights: override.highlights ?? exp.highlights,
+          tags: override.tags ?? exp.tags,
         };
       }
       return exp;
@@ -126,15 +127,15 @@ export async function getTailoredResume(
   // Filter projects if specified, otherwise include all
   const filteredProjects = application.projectIds
     ? application.projectIds
-        .map((id) => masterResume.projects?.find((p) => p.id === id))
-        .filter((p): p is NonNullable<typeof p> => p !== undefined)
+      .map((id) => masterResume.projects?.find((p) => p.id === id))
+      .filter((p): p is NonNullable<typeof p> => p !== undefined)
     : masterResume.projects;
 
   // Filter education if specified, otherwise include all
   const filteredEducation = application.educationIds
     ? application.educationIds
-        .map((id) => masterResume.education.find((e) => e.id === id))
-        .filter((e): e is NonNullable<typeof e> => e !== undefined)
+      .map((id) => masterResume.education.find((e) => e.id === id))
+      .filter((e): e is NonNullable<typeof e> => e !== undefined)
     : masterResume.education;
 
   // Filter skills: hide categories, then highlight specific skills

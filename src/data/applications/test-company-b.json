@@ -3,7 +3,7 @@
     "companyName": "Test Company B",
     "roleName": "Lead Software Engineer",
     "customSummary": null,
-    "customIntro": "Hi Test Company team! This is a tailored view of my resume highlighting the most relevant experience for this role.",
+    "customIntro": "Hi Test Company B team! This is a tailored view of my resume highlighting the most relevant experience for this role.",
     "experienceIds": [
         "exp-btcdepot-senior",
         "exp-disney-senior",
