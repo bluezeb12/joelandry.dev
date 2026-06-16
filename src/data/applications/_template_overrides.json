@@ -30,5 +30,6 @@
     "projectIds": null,
     "educationIds": null,
     "highlightedSkills": null,
-    "hiddenSkillCategories": null
+    "hiddenSkillCategories": null,
+    "skillsOverrides": null
 }

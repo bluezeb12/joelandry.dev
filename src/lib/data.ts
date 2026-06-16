@@ -138,25 +138,54 @@ export async function getTailoredResume(
       .filter((e): e is NonNullable<typeof e> => e !== undefined)
     : masterResume.education;
 
-  // Filter skills: hide categories, then highlight specific skills
-  let filteredSkills = { ...masterResume.skills };
+  // Start with the base skills from master resume or skillsOverrides
+  let filteredSkills: Record<string, string[]>;
+  if (application.skillsOverrides) {
+    filteredSkills = {};
+    for (const [cat, skills] of Object.entries(application.skillsOverrides)) {
+      filteredSkills[cat] = [...skills];
+    }
+  } else {
+    filteredSkills = { ...masterResume.skills };
+  }
 
+  // Remove hidden categories
   if (application.hiddenSkillCategories) {
     for (const category of application.hiddenSkillCategories) {
       delete filteredSkills[category];
     }
   }
 
+  // Apply highlightedSkills logic
   if (application.highlightedSkills) {
-    const highlighted = new Set(application.highlightedSkills);
-    const newSkills: Record<string, string[]> = {};
-    for (const [category, skills] of Object.entries(filteredSkills)) {
-      const filtered = skills.filter((s) => highlighted.has(s));
-      if (filtered.length > 0) {
-        newSkills[category] = filtered;
+    const highlightedSet = new Set(application.highlightedSkills);
+
+    if (application.skillsOverrides) {
+      const newSkills: Record<string, string[]> = {};
+      for (const [category, skills] of Object.entries(filteredSkills)) {
+        // Highlighted skills from the override, ordered by highlightedSkills
+        const highlighted = application.highlightedSkills.filter((s) => skills.includes(s));
+
+        // Remaining skills from the override that are not highlighted
+        const remaining = skills.filter((s) => !highlightedSet.has(s));
+
+        const combined = [...highlighted, ...remaining];
+        if (combined.length > 0) {
+          newSkills[category] = combined;
+        }
       }
+      filteredSkills = newSkills;
+    } else {
+      // Original fallback logic if skillsOverrides is not defined
+      const newSkills: Record<string, string[]> = {};
+      for (const [category, skills] of Object.entries(filteredSkills)) {
+        const filtered = skills.filter((s) => highlightedSet.has(s));
+        if (filtered.length > 0) {
+          newSkills[category] = filtered;
+        }
+      }
+      filteredSkills = newSkills;
     }
-    filteredSkills = newSkills;
   }
 
   const tailoredResume: Resume = {

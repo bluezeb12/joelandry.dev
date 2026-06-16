@@ -118,6 +118,7 @@ export const ApplicationSchema = z.object({
   educationIds: z.array(z.string()).nullable().optional(),
   highlightedSkills: z.array(z.string()).nullable().optional(),
   hiddenSkillCategories: z.array(z.string()).nullable().optional(),
+  skillsOverrides: z.record(z.string(), z.array(z.string())).nullable().optional(),
 });
 
 // ─── Inferred Types ─────────────────────────────────────────────────────────

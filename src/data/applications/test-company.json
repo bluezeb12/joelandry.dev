@@ -18,5 +18,14 @@
     "AWS",
     "Docker"
   ],
-  "hiddenSkillCategories": null
+  "hiddenSkillCategories": null,
+  "skillsOverrides": {
+    "Programming Languages": [
+      "Go",
+      "Rust"
+    ],
+    "Special Skills": [
+      "Dynamic Overrides"
+    ]
+  }
 }
