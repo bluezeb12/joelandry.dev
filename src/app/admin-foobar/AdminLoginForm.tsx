@@ -1,20 +1,13 @@
 "use client";
 
-import { use, useState, type SubmitEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { TerminalWindow } from "@/components/resume/TerminalWindow";
 
-export const runtime = "edge";
-
-export default function LoginPage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = use(params);
+export default function AdminLoginForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -23,23 +16,19 @@ export default function LoginPage({
     const password = formData.get("password") as string;
 
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch("/api/admin-foobar/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ slug, password }),
-        redirect: "manual",
+        body: JSON.stringify({ password }),
       });
 
-      if (res.type === "opaqueredirect" || res.status === 302) {
-        // Cookie was set, follow the redirect
-        window.location.href = `/apply/${slug}`;
+      if (res.ok) {
+        window.location.reload();
         return;
       }
 
-      if (!res.ok) {
-        const data = await res.json();
-        setError(data.error || "Authentication failed");
-      }
+      const data = await res.json();
+      setError(data.error || "Authentication failed");
     } catch {
       setError("Network error. Please try again.");
     } finally {
@@ -47,19 +36,13 @@ export default function LoginPage({
     }
   }
 
-  // Format slug for display: "acme-corp" → "Acme Corp"
-  const displayName = slug
-    .split("-")
-    .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
-    .join(" ");
-
   return (
     <div className="login-container">
       <div className="login-window">
-        <TerminalWindow title={`~/apply/${slug}/login`}>
+        <TerminalWindow title="~/admin-foobar/login">
           <div className="login-prompt">
             <span style={{ color: "var(--color-text-muted)" }}>$</span>{" "}
-            ssh {slug}@joelandry.dev
+            sudo login admin
           </div>
           <p
             style={{
@@ -68,13 +51,7 @@ export default function LoginPage({
               marginBottom: "1.5rem",
             }}
           >
-            This page is password-protected.
-            {displayName !== slug && (
-              <>
-                <br />
-                Enter the password provided for <strong style={{ color: "var(--color-text-accent)" }}>{displayName}</strong>.
-              </>
-            )}
+            Access to this system is restricted to authorized administrators only.
           </p>
 
           <form onSubmit={handleSubmit} className="login-form">
@@ -96,7 +73,7 @@ export default function LoginPage({
                 name="password"
                 type="password"
                 className="login-input"
-                placeholder="Enter access password"
+                placeholder="Enter admin password"
                 autoFocus
                 required
                 autoComplete="current-password"
