@@ -1,0 +1,60 @@
+{
+    "slug": "github-swe-npm",
+    "companyName": "GitHub",
+    "roleName": "Software Engineer - III - npm",
+    "customSummary": "Accomplished Senior Software Engineer with 10+ years of experience designing, building scaling, and migrating high-availability systems. Proven track record of leading engineering initiatives, optimizing API performance, and architecting robust cloud infrastructure across financial services and enterprise entertainment domains. Expert in TypeScript/Node.js backend orchestration layers, AWS cloud migrations, and modern TypeScript and Node.JS frameworks.",
+    "customIntro": "Hey GitHub hiring team, I'm so glad you're here! As a passionate Senior Software Engineer with over 10 years of experience, I have a ton of appreciation and respect for what the teams at GitHub have been building. I've been thoroughly impressed with some of the recent announcements made at npm and some of the new standards you all have been building to try and put a stop to the recent influx of Supply Chain hi-jacks. It would awesome to join the team that's been building and improving tools I use every single day, both in my personal life and professional career. I have a general 'build it to be reused' mindset in every coding project that I take on, and I think this site and my Resume are a good show of that.",
+    "experienceIds": [
+        "exp-btcdepot-senior",
+        "exp-disney-senior",
+        "exp-disney-backend",
+        "exp-disney-contractor",
+        "exp-frsa-developer",
+        "exp-frsa-intern"
+    ],
+    "projectIds": null,
+    "educationIds": null,
+    "highlightedSkills": null,
+    "hiddenSkillCategories": null,
+    "skillsOverrides": {
+        "Programming Languages": [
+            "TypeScript",
+            "JavaScript",
+            "Python",
+            "C#",
+            "Go"
+        ],
+        "Frameworks & Libraries": [
+            "Node.js",
+            "React",
+            "Express.js",
+            "Restify.js",
+            "Next.js",
+            "Angular",
+            ".NET Core",
+            ".NET Framework",
+            "ASP.NET",
+            "LINQ"
+        ],
+        "AI Tooling": [
+            "Claude",
+            "Cursor",
+            "Gemini/Gemini CLI",
+            "Antigravity"
+        ],
+        "Cloud & Infrastructure": [
+            "AWS (Lambda, ECS, CloudWatch, Kinesis, S3, CloudFront)",
+            "Docker",
+            "Kubernetes",
+            "PostgreSQL",
+            "GitHub Actions",
+            "Jenkins",
+            "Terraform"
+        ],
+        "Methodologies": [
+            "Agile/Scrum",
+            "Developer Tooling",
+            "API Design & Development"
+        ]
+    }
+}
