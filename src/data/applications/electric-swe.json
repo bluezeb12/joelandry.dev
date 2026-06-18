@@ -1,0 +1,77 @@
+{
+  "slug": "electric-swe",
+  "companyName": "Electric",
+  "roleName": "Senior Software Engineer",
+  "customSummary": null,
+  "customIntro": "Hey Electric Hiring Team, I'm really excited you're here! I'm looking forward to getting the chance to talk more about how I can help your team continue to build and grow some awesome products to assist small- and medium-sized businesses in simplifying their IT and security needs. I think you'll agree that my background and experience are in line with what you're looking for!",
+  "experienceIds": [
+    "exp-btcdepot-senior",
+    "exp-disney-senior",
+    "exp-disney-backend",
+    "exp-disney-contractor",
+    "exp-frsa-developer",
+    "exp-frsa-intern"
+  ],
+  "projectIds": null,
+  "educationIds": null,
+  "highlightedSkills": null,
+  "hiddenSkillCategories": null,
+  "skillsOverrides": {
+    "Programming Languages": [
+      "TypeScript",
+      "JavaScript",
+      "Python",
+      "C#",
+      "ES6",
+      "ES2021",
+      "CSS",
+      "SASS/SCSS"
+    ],
+    "Frameworks & Libraries": [
+      "Node.js",
+      "React",
+      "Express.js",
+      "Restify.js",
+      "Next.js",
+      "Angular",
+      ".NET Core",
+      ".NET Framework",
+      "ASP.NET",
+      "LINQ"
+    ],
+    "AI Tooling": [
+      "Claude",
+      "Gemini/Gemini CLI",
+      "Cursor",
+      "Antigravity"
+    ],
+    "Cloud & DevOps": [
+      "AWS (Lambda, ECS, CloudWatch, Kinesis, S3, CloudFront)",
+      "Docker",
+      "GitHub Actions",
+      "Cloudflare",
+      "Google Cloud",
+      "Jenkins",
+      "Firebase",
+      "Azure",
+      "Dockerization/Containerization",
+      "Cloud Migrations"
+    ],
+    "Databases & Tools": [
+      "PostgreSQL",
+      "MongoDB",
+      "SQL",
+      "SQL Server",
+      "MySQL",
+      "ElasticSearch",
+      "Entity Framework",
+      "Formance Ledger"
+    ],
+    "Methodologies": [
+      "Systems Design",
+      "Functional & Object-Oriented Programming (OOP)",
+      "CI/CD",
+      "Unit & Automation Testing"
+    ]
+  }
+}
