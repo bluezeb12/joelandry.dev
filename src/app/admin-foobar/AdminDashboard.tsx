@@ -30,7 +30,7 @@ export default function AdminDashboard({ applications }: AdminDashboardProps) {
   }
 
   function handleCopy(slug: string) {
-    const url = `${origin}/apply/${slug}`;
+    const url = `${origin}/${slug}`;
     navigator.clipboard.writeText(url).then(() => {
       setCopiedId(slug);
       setTimeout(() => setCopiedId(null), 2000);
@@ -119,7 +119,7 @@ export default function AdminDashboard({ applications }: AdminDashboardProps) {
               </div>
             ) : (
               applications.map((app) => {
-                const targetUrl = `${origin}/apply/${app.slug}`;
+                const targetUrl = `${origin}/${app.slug}`;
                 const isCopied = copiedId === app.slug;
 
                 return (
@@ -222,7 +222,7 @@ export default function AdminDashboard({ applications }: AdminDashboardProps) {
                         {isCopied ? <Check size={16} /> : <Copy size={16} />}
                       </button>
                       <a
-                        href={`/apply/${app.slug}`}
+                        href={`/${app.slug}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{

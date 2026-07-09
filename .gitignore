@@ -43,3 +43,6 @@ next-env.d.ts
 Resume Joseph Landry 051926.pdf
 resume.txt
 Screenshot_*.png
+
+# generated files
+/src/lib/applications-registry.ts

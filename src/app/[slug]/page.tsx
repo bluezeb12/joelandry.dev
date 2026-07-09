@@ -13,6 +13,13 @@ import {
 
 export const runtime = "edge";
 
+export const metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
+
 export default async function TailoredResumePage({
   params,
 }: {
@@ -45,7 +52,7 @@ export default async function TailoredResumePage({
       {/* ─── Application Intro ────────────────────────────────────── */}
       {(application.customIntro || application.roleName) && (
         <div className="resume-section">
-          <TerminalWindow title={`~/apply/${slug}`}>
+          <TerminalWindow title={`~/${slug}`}>
             <div style={{ textAlign: "center" }}>
               <span className="application-role-badge">
                 {application.roleName} @ {application.companyName}

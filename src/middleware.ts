@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
     const redirectUrl = new URL("/", request.url);
     const response = NextResponse.redirect(redirectUrl);
     response.cookies.delete("preferred_resume_version");
-    
+
     // Clean up any old auth_ cookies if they exist
     const allCookies = request.cookies.getAll();
     for (const cookie of allCookies) {
@@ -25,15 +25,31 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // 2. Detect Direct Hits to /apply/:company
-  const match = pathname.match(/^\/apply\/([^/]+)/);
-  if (match) {
-    const company = match[1];
+  // 2. Redirect /apply/:company to /:company
+  const applyMatch = pathname.match(/^\/apply\/([^/]+)/);
+  if (applyMatch) {
+    const company = applyMatch[1];
+    const redirectUrl = new URL(`/${company}`, request.url);
+    const response = NextResponse.redirect(redirectUrl, 308); // permanent redirect
 
-    // Only set the cookie if it is a valid company in our registry
+    // Set cookie if valid company
     if (company && company in applicationsRegistry) {
+      response.cookies.set("preferred_resume_version", company, {
+        path: "/",
+        maxAge: 2592000, // 30 days
+        sameSite: "lax",
+        secure: true,
+      });
+    }
+    return response;
+  }
+
+  // 3. Detect Direct Hits to /:company
+  const pathSegments = pathname.split("/").filter(Boolean);
+  if (pathSegments.length === 1) {
+    const company = pathSegments[0];
+    if (company in applicationsRegistry) {
       const currentCookie = request.cookies.get("preferred_resume_version")?.value;
-      
       const response = NextResponse.next();
       if (currentCookie !== company) {
         response.cookies.set("preferred_resume_version", company, {
@@ -45,16 +61,14 @@ export async function middleware(request: NextRequest) {
       }
       return response;
     }
-    
-    return NextResponse.next();
   }
 
-  // 3. Detect Generic Hits (Fallback)
+  // 4. Detect Generic Hits (Fallback)
   if (pathname === "/" || pathname === "/resume") {
     const preferredCompany = request.cookies.get("preferred_resume_version")?.value;
     if (preferredCompany && preferredCompany in applicationsRegistry) {
       // Internally rewrite to the preferred company's tailored resume
-      const rewriteUrl = new URL(`/apply/${preferredCompany}`, request.url);
+      const rewriteUrl = new URL(`/${preferredCompany}`, request.url);
       return NextResponse.rewrite(rewriteUrl);
     }
   }
@@ -63,6 +77,15 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/resume", "/apply/:path*"],
+  matcher: [
+    /*
+     * Match all request paths except for the ones starting with:
+     * - api (API routes)
+     * - _next/static (static files)
+     * - _next/image (image optimization files)
+     * - favicon.ico, sitemap.xml, robots.txt (metadata files)
+     */
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)",
+  ],
 };
 

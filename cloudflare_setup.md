@@ -44,10 +44,9 @@ In the **Configure build and deployments** screen, configure the following setti
 > Cloudflare Pages requires all dynamic (non-static) routes and middleware/proxies to be executed on the **Edge Runtime**. 
 > 
 > The project has already been updated to run on the **Edge Runtime** where required:
-> *   [src/middleware.ts](file:///home/jdillan/Development/joelandry.dev/src/middleware.ts) (runs on Edge runtime; must keep the deprecated `middleware.ts` naming convention in Next.js 16 to force Edge compilation for Cloudflare compatibility, rather than the Node.js default for `proxy.ts`)
-> *   [src/app/api/auth/login/route.ts](file:///home/jdillan/Development/joelandry.dev/src/app/api/auth/login/route.ts) (API, exports `runtime = "edge"`)
-> *   [src/app/apply/[slug]/page.tsx](file:///home/jdillan/Development/joelandry.dev/src/app/apply/[slug]/page.tsx) (Dynamic page, exports `runtime = "edge"`)
-> *   [src/app/apply/[slug]/login/page.tsx](file:///home/jdillan/Development/joelandry.dev/src/app/apply/[slug]/login/page.tsx) (Login page, exports `runtime = "edge"`)
+> *   [src/middleware.ts](./src/middleware.ts) (runs on Edge runtime; must keep the deprecated `middleware.ts` naming convention in Next.js 16 to force Edge compilation for Cloudflare compatibility, rather than the Node.js default for `proxy.ts`)
+> *   [src/app/api/admin-foobar/login/route.ts](./src/app/api/admin-foobar/login/route.ts) (API, exports `runtime = "edge"`)
+> *   [src/app/[slug]/page.tsx](./src/app/[slug]/page.tsx) (Dynamic page, exports `runtime = "edge"`)
 > 
 > If you add more API endpoints or dynamic routes in the future, you must include `export const runtime = "edge";` in those files. If you add route-matching logic, add it to `src/middleware.ts`.
 
