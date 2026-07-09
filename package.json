@@ -7,6 +7,7 @@
     "prebuild": "node scripts/generate-registry.js",
     "dev": "next dev",
     "build": "next build",
+    "build:pages": "next-on-pages",
     "start": "next start",
     "lint": "eslint"
   },
@@ -19,6 +20,8 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.16",
+    "@cloudflare/workers-types": "^5.20260708.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",

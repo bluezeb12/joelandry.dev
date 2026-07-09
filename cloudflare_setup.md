@@ -36,7 +36,7 @@ In the **Configure build and deployments** screen, configure the following setti
 *   **Project Name:** `joelandry-dev` (or your preferred name)
 *   **Production Branch:** `main` (or `master`)
 *   **Framework Preset:** Select **Next.js**
-*   **Build Command:** `npx @cloudflare/next-on-pages`
+*   **Build Command:** `npm run build:pages`
 *   **Build Output Directory:** `.vercel/output/static`
 
 > [!IMPORTANT]
@@ -101,13 +101,13 @@ npx wrangler pages secret put APP_PW_TEST_COMPANY
 
 If you want to build and preview your application locally as it would run on Cloudflare Pages, or deploy it manually without waiting for Git CI:
 
-### Add Build Script to `package.json`
+### Build Script in `package.json`
 
-Add a dedicated script to your `package.json` to run the Cloudflare build locally:
+The project includes a dedicated script in `package.json` to run the Cloudflare build locally:
 
 ```json
 "scripts": {
-  "build:pages": "npx @cloudflare/next-on-pages"
+  "build:pages": "next-on-pages"
 }
 ```
 
